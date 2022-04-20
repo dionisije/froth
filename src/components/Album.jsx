@@ -1,18 +1,35 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import {object} from 'prop-types';
 
-const Album = ({detail}) => (
-    <div className="card shadow-sm">
-        <svg className="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        <div className="card-body">
-            <p className="card-text">
-                {detail.Catalogue}
-            </p>
-        </div>
-    </div>
-);
+const Album = ({detail}) => {
+    const basePath = '/images';
 
-Album.PropTypes = {
+    return (
+        <Link href={`/detail/${detail.Catalogue.toLowerCase()}`} passHref>
+            <div className="card shadow-sm text-center">
+                <div>
+                    <Image
+                        className="img-thumbnail mx-auto d-block"
+                        src={`${basePath}/${detail.Catalogue.toLowerCase()}.jpg`}
+                        alt={`${detail.Catalogue}`}
+                        layout="responsive"
+                        width={100}
+                        height={100}
+                    />
+                </div>
+                <div className="card-body">
+                    <h4 className="card-text">
+                        {detail.Catalogue}
+                    </h4>
+                </div>
+            </div>
+        </Link>
+    );
+};
+
+Album.propTypes = {
     detail: object.isRequired
 };
 

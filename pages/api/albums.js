@@ -5,10 +5,10 @@ const {promisify} = require('util');
 const readFile = promisify(fs.readFile);
 
 export default async function handler(req, res) {
-    const jsonFile = path.resolve('./data', 'Albums.json');
+    const jsonFile = path.resolve('./raw-data', 'Albums.json');
     try {
         const readFileData = await readFile(jsonFile, 'utf8');
-        const albums = JSON.parse(readFileData).find(element => element.name === 'Albums').data;
+        const albums = JSON.parse(readFileData);
         if (albums) {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send(JSON.stringify(albums, null, 2));
