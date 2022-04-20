@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import {object} from 'prop-types';
 
 const Album = ({detail}) => (
     <div className="card shadow-sm">
@@ -11,5 +11,9 @@ const Album = ({detail}) => (
         </div>
     </div>
 );
+
+Album.PropTypes = {
+    detail: object.isRequired
+};
 
 export default Album;
